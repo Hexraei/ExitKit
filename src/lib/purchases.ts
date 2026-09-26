@@ -16,7 +16,7 @@ import { Purchases, LOG_LEVEL } from '@revenuecat/purchases-capacitor';
 
 export const ENTITLEMENT_ID = 'handover_pack';
 export const PRODUCT_ID = 'exitkit_pack_unlock';
-export const TEST_STORE_API_KEY = 'test_YourTestStoreApiKeyHere'; // replaced during setup, see README
+export const TEST_STORE_API_KEY = 'test_hBWEXCXmJvpkgUHtXIexyqmLmzU'; // replaced during setup, see README
 
 export async function configurePurchases(): Promise<void> {
   if (!Capacitor.isNativePlatform()) return; // web preview runs without the SDK

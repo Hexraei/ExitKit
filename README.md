@@ -31,13 +31,13 @@ No subscription, on purpose: a move-out is an episodic, high-value moment. The p
 
 ## RevenueCat Test Store (how the demo purchase works)
 
-The app ships configured for the **RevenueCat Test Store**, so the purchase flow in the demo is a *genuine SDK purchase and entitlement grant* - not a fake modal - with no real charges:
+The app ships configured for the **RevenueCat Test Store**, so the purchase flow in the demo is a *genuine SDK purchase and entitlement grant* - not a fake modal - with no real charges. The dashboard side is already set up:
 
-1. In the RevenueCat dashboard, create a Test Store app.
-2. Add a non-consumable product `exitkit_pack_unlock` to the default offering.
-3. Create an entitlement `handover_pack` and attach the product.
-4. Put the Test Store API key in `src/lib/purchases.ts` (`TEST_STORE_API_KEY`).
-5. Run on Android (`npx cap sync`, open in Android Studio). Buy once -> entitlement active -> PDF unlocked. Reinstall -> Restore.
+- Test Store app created; API key already in `src/lib/purchases.ts` (`TEST_STORE_API_KEY`).
+- Non-consumable product `exitkit_pack_unlock` ($rc_lifetime package) in the `default` offering.
+- Entitlement `handover_pack` created and attached to the product.
+
+To run the purchase end to end: run on Android (`npx cap sync`, open in Android Studio, or install the built APK on a phone). Buy once -> entitlement active -> PDF unlocked. Reinstall -> Restore. Test Store purchases are simulated - no card, no charge.
 
 ## Running it
 
