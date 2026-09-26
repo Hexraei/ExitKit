@@ -1,5 +1,7 @@
 # ExitKit
 
+**Live demo (web preview):** https://exit-kit.vercel.app/
+
 **Move out without the deposit fight.** ExitKit walks roommates through a move-out handover - room-condition photos, meter readings, agreed deductions - and turns it into one shareable pack with an exact per-person deposit settlement.
 
 Built for **RevenueCat Shipaton 2026, Next Gen (student) category**. Android app (Capacitor + React), one-time in-app purchase via the RevenueCat SDK.
