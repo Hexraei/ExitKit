@@ -8,17 +8,18 @@ import { buildPack, checkCompleteness } from './lib/pack';
 import { buildPackPdf } from './lib/pdf';
 import { configurePurchases, hasUnlock, buyUnlock, restoreUnlock } from './lib/purchases';
 import { Capacitor } from '@capacitor/core';
+import { KeyRound, Home, Camera, Gauge, ReceiptText, Package, Plus, Wallet, FileText, Sparkles } from 'lucide-react';
 
 let n = 0;
 const id = (p: string) => `${p}-${Date.now().toString(36)}-${++n}`;
 
 type Step = 'setup' | 'walk' | 'meters' | 'settle' | 'pack';
-const STEPS: { id: Step; label: string }[] = [
-  { id: 'setup', label: '1 Setup' },
-  { id: 'walk', label: '2 Walkthrough' },
-  { id: 'meters', label: '3 Meters & bills' },
-  { id: 'settle', label: '4 Settlement' },
-  { id: 'pack', label: '5 Pack' },
+const STEPS: { id: Step; label: string; icon: typeof Home }[] = [
+  { id: 'setup', label: 'Setup', icon: Home },
+  { id: 'walk', label: 'Walkthrough', icon: Camera },
+  { id: 'meters', label: 'Meters & bills', icon: Gauge },
+  { id: 'settle', label: 'Settlement', icon: Wallet },
+  { id: 'pack', label: 'Pack', icon: Package },
 ];
 
 export default function App() {
@@ -91,20 +92,25 @@ export default function App() {
   };
 
   return (
-    <div className="app">
-      <header>
+    <div className={`app step-${step}`}>
+      <header className="hero">
+        <span className="keymark"><KeyRound size={26} strokeWidth={2.2} /></span>
         <h1>ExitKit</h1>
         <p className="tag">Move out without the deposit fight.</p>
       </header>
       <nav className="steps">
-        {STEPS.map((s) => (
-          <button key={s.id} className={step === s.id ? 'on' : ''} onClick={() => setStep(s.id)}>{s.label}</button>
+        {STEPS.map((s, i) => (
+          <button key={s.id} className={`${step === s.id ? 'on' : ''} c-${s.id}`} onClick={() => setStep(s.id)}>
+            <span className="num">{i + 1}</span>
+            <s.icon size={14} strokeWidth={2.4} />
+            {s.label}
+          </button>
         ))}
       </nav>
 
       {step === 'setup' && (
         <section className="panel">
-          <h2>The flat and the people</h2>
+          <h2><Home size={18} className="hicon" /> The flat and the people</h2>
           <label>Property
             <input value={h.propertyLabel} onChange={(e) => patch({ propertyLabel: e.target.value })} placeholder="2BHK, Kotturpuram - flat 3B" />
           </label>
@@ -125,12 +131,12 @@ export default function App() {
       )}
 
       {step === 'walk' && (
-        <section>
+        <section className="anim" key="walk">
           {ROOM_TEMPLATES.map((t) => {
             const photos = h.photos.filter((p) => p.roomId === t.id);
             return (
               <div className="panel" key={t.id}>
-                <h2>{t.name}</h2>
+                <h2><Camera size={18} className="hicon" /> {t.name}</h2>
                 {t.items.map((item) => {
                   const c = h.checks.find((x) => x.roomId === t.id && x.item === item);
                   return (
@@ -158,7 +164,7 @@ export default function App() {
                     </div>
                   ))}
                   <label className="addphoto">
-                    + photo
+                    <Plus size={18} strokeWidth={2.4} /> photo
                     <input type="file" accept="image/*" capture="environment" style={{ display: 'none' }} onChange={(e) => { const f = e.target.files?.[0]; if (f) addPhoto(t.id, f); e.target.value = ''; }} />
                   </label>
                 </div>
@@ -170,7 +176,7 @@ export default function App() {
 
       {step === 'meters' && (
         <section className="panel">
-          <h2>Final meter readings</h2>
+          <h2><Gauge size={18} className="hicon" /> Final meter readings</h2>
           {METER_KINDS.map((mk) => {
             const m = h.meters.find((x) => x.kind === mk.kind);
             return (
@@ -184,7 +190,7 @@ export default function App() {
               </label>
             );
           })}
-          <h2>Agreed deductions</h2>
+          <h2><ReceiptText size={18} className="hicon" /> Agreed deductions</h2>
           <p className="hint">Only what everyone agrees on: unpaid bills, damage. Each is shared equally or charged to one person.</p>
           {h.deductions.map((d) => (
             <div className="row" key={d.id}>
@@ -203,7 +209,7 @@ export default function App() {
 
       {step === 'settle' && settlement && (
         <section className="panel">
-          <h2>Who gets what back</h2>
+          <h2><Wallet size={18} className="hicon" /> Who gets what back</h2>
           <p className="hint">Exact to the paise. Rounding leftovers are shared in a fixed order, so everyone sees the same numbers on every phone.</p>
           {settlement.lines.map((l) => (
             <div className="settleline" key={l.roommateId}>
@@ -217,9 +223,9 @@ export default function App() {
       )}
 
       {step === 'pack' && (
-        <section>
+        <section className="anim" key="pack">
           <div className="panel">
-            <h2>Handover pack readiness</h2>
+            <h2><Sparkles size={18} className="hicon" /> Handover pack readiness</h2>
             {completeness.complete ? (
               <p className="ok-text">Ready. Everything a landlord asks for is here.</p>
             ) : (
@@ -227,7 +233,7 @@ export default function App() {
             )}
           </div>
           <div className="panel">
-            <h2>Preview (free)</h2>
+            <h2><FileText size={18} className="hicon" /> Preview (free)</h2>
             {buildPack(h).map((s) => (
               <div key={s.roomId} className="preview-room">
                 <strong>{s.roomName}</strong> - {s.photos.length} photo(s), {s.openIssues.length} open issue(s)
@@ -244,7 +250,7 @@ export default function App() {
               </>
             ) : (
               <>
-                <h2>Unlock the full pack</h2>
+                <h2><KeyRound size={18} className="hicon" /> Unlock the full pack</h2>
                 <p>One payment, yours forever. No subscription - a move-out happens once, you pay once.</p>
                 {Capacitor.isNativePlatform() ? (
                   <>
