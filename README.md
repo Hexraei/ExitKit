@@ -42,11 +42,21 @@ To run the purchase end to end: run on Android (`npx cap sync`, open in Android 
 ## Running it
 
 ```bash
-npm install
+git clone https://github.com/Hexraei/ExitKit.git
+cd ExitKit
+npm ci                # install the exact pinned dependencies
+npm run build         # production web build -> dist/
+npx cap sync android  # copy dist/ and the RevenueCat plugin into the android/ project
+```
+
+The Android project (`android/`) is committed, so there is no `cap add` step. Open the `android/` folder in Android Studio, let the Gradle sync finish, pick a real phone (Developer mode + USB debugging on) and press **Run**. On the Pack screen, tap **Unlock the PDF pack**: the RevenueCat Test Store purchase sheet appears, confirm it, the `handover_pack` entitlement goes active and the PDF unlocks. Reinstall -> **Restore** brings the unlock back.
+
+For everyday development:
+
+```bash
 npm run dev      # browser preview (everything except the actual purchase)
-npm test         # settlement + pack tests
+npm test         # settlement + pack tests (15 passing)
 npm run build    # production web build
-npx cap add android && npx cap sync   # then open android/ in Android Studio
 ```
 
 ## What's inside

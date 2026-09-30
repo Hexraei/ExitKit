@@ -11,8 +11,9 @@
     "cap:sync": "cap sync"
   },
   "dependencies": {
+    "@capacitor/android": "^7.0.0",
     "@capacitor/core": "^7.0.0",
-    "@revenuecat/purchases-capacitor": "^10.3.1",
+    "@revenuecat/purchases-capacitor": "^11.3.2",
     "lucide-react": "^1.48.0",
     "pdf-lib": "^1.17.1",
     "react": "^18.3.1",
