@@ -42,9 +42,9 @@ header.hero h1 {
 .steps::-webkit-scrollbar { display: none; }
 .steps button {
   flex: 0 0 auto; display: inline-flex; align-items: center; gap: 0.4rem;
-  border: 1.5px solid var(--line); background: #ffffffd9; border-radius: 999px;
+  border: 1.5px solid var(--line); background: #fff; border-radius: 999px;
   padding: 0.45rem 0.85rem; font-size: 0.83rem; font-weight: 600; color: var(--muted);
-  width: auto; margin: 0; cursor: pointer; backdrop-filter: blur(4px);
+  width: auto; margin: 0; cursor: pointer;
   transition: transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease, border-color .18s ease;
 }
 .steps button:hover { transform: translateY(-1px); box-shadow: 0 4px 14px #2b214022; }
