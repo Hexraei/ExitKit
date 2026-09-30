@@ -32,8 +32,14 @@ export async function buildPackPdf(h: Handover): Promise<Uint8Array> {
     const page = doc.addPage([595, 842]); // A4
     return page;
   };
+  // Standard fonts are WinAnsi-only: spell out the rupee sign and replace anything
+  // else they can't draw (Tamil names, emoji) instead of crashing the whole PDF.
+  // ponytail: non-Latin names print as '?', embed a Unicode font via @pdf-lib/fontkit if that matters.
+  const drawable = new Set(font.getCharacterSet());
+  const safe = (s: string) =>
+    Array.from(s.replace(/₹/g, 'Rs. '), (ch) => (drawable.has(ch.codePointAt(0)!) ? ch : '?')).join('');
   const text = (page: any, s: string, x: number, y: number, size = 11, f = font, color = INK) => {
-    page.drawText(s, { x, y, size, font: f, color });
+    page.drawText(safe(s), { x, y, size, font: f, color });
   };
 
   // Cover

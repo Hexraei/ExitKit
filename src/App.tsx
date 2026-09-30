@@ -8,10 +8,37 @@ import { buildPack, checkCompleteness } from './lib/pack';
 import { buildPackPdf } from './lib/pdf';
 import { configurePurchases, hasUnlock, buyUnlock, restoreUnlock } from './lib/purchases';
 import { Capacitor } from '@capacitor/core';
+import { Filesystem, Directory } from '@capacitor/filesystem';
+import { Share } from '@capacitor/share';
 import { KeyRound, Home, Camera, Gauge, ReceiptText, Package, Plus, Wallet, FileText, Sparkles } from 'lucide-react';
 
 let n = 0;
 const id = (p: string) => `${p}-${Date.now().toString(36)}-${++n}`;
+
+/** Camera photos are several MB; shrink to a JPEG that fits localStorage and embeds in the PDF. */
+function shrinkPhoto(file: File, maxSide = 1280): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      const scale = Math.min(1, maxSide / Math.max(img.width, img.height));
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.round(img.width * scale);
+      canvas.height = Math.round(img.height * scale);
+      canvas.getContext('2d')!.drawImage(img, 0, 0, canvas.width, canvas.height);
+      URL.revokeObjectURL(url);
+      resolve(canvas.toDataURL('image/jpeg', 0.7));
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('Could not read that photo')); };
+    img.src = url;
+  });
+}
+
+function toBase64(bytes: Uint8Array): string {
+  let bin = '';
+  for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+  return btoa(bin);
+}
 
 type Step = 'setup' | 'walk' | 'meters' | 'settle' | 'pack';
 const STEPS: { id: Step; label: string; icon: typeof Home }[] = [
@@ -23,16 +50,22 @@ const STEPS: { id: Step; label: string; icon: typeof Home }[] = [
 ];
 
 export default function App() {
-  const [h, setH] = useState<Handover>(emptyHandover);
+  const [h, setH] = useState<Handover>(loadHandover);
   const [step, setStep] = useState<Step>('setup');
   const [unlocked, setUnlocked] = useState(false);
   const [busy, setBusy] = useState<string>('');
 
   useEffect(() => {
-    setH(loadHandover());
     configurePurchases().then(() => hasUnlock().then(setUnlocked)).catch(() => {});
   }, []);
-  useEffect(() => { saveHandover(h); }, [h]);
+  // Debounced: serialising every photo on each keystroke made typing stutter.
+  useEffect(() => {
+    const t = setTimeout(() => saveHandover(h), 400);
+    // Flush immediately if the app is backgrounded or closed inside the debounce window.
+    const flush = () => { if (document.visibilityState === 'hidden') saveHandover(h); };
+    document.addEventListener('visibilitychange', flush);
+    return () => { clearTimeout(t); document.removeEventListener('visibilitychange', flush); };
+  }, [h]);
 
   const patch = (p: Partial<Handover>) => setH((prev) => ({ ...prev, ...p }));
   const completeness = useMemo(() => checkCompleteness(h), [h]);
@@ -41,29 +74,39 @@ export default function App() {
     [h.roommates, h.deductions],
   );
 
-  const addPhoto = (roomId: string, file: File) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      const dataUrl = String(reader.result);
+  const addPhoto = async (roomId: string, file: File) => {
+    try {
+      const dataUrl = await shrinkPhoto(file);
       setH((prev) => ({
         ...prev,
         photos: [...prev.photos, { id: id('ph'), roomId, dataUrl, note: '', takenAt: new Date().toISOString() }],
       }));
-    };
-    reader.readAsDataURL(file);
+    } catch (e) {
+      alert(e instanceof Error ? e.message : 'Could not add that photo');
+    }
   };
 
   const downloadPdf = async () => {
     setBusy('Building your PDF...');
     try {
       const bytes = await buildPackPdf(h);
+      const fileName = `exitkit-handover-${h.moveOutDate || 'pack'}.pdf`;
+      if (Capacitor.isNativePlatform()) {
+        // WebView ignores <a download>: write the file, then hand it to the share sheet (save to Files, WhatsApp, email).
+        const { uri } = await Filesystem.writeFile({ path: fileName, data: toBase64(bytes), directory: Directory.Cache });
+        await Share.share({ title: 'ExitKit handover pack', files: [uri], dialogTitle: 'Save or send the handover pack' });
+        return;
+      }
       const blob = new Blob([bytes.buffer as ArrayBuffer], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `exitkit-handover-${h.moveOutDate || 'pack'}.pdf`;
+      a.download = fileName;
       a.click();
       URL.revokeObjectURL(url);
+    } catch (e) {
+      // Share sheet dismissed is not an error worth showing.
+      if (!(e instanceof Error && /cancel/i.test(e.message))) alert(`Could not create the PDF: ${e instanceof Error ? e.message : 'unknown error'}`);
     } finally {
       setBusy('');
     }
