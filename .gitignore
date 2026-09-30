@@ -2,3 +2,5 @@ node_modules
 dist
 *.local
 .DS_Store
+graphify-out/.graphify_python
+graphify-out/.graphify_root

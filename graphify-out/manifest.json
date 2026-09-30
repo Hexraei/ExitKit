@@ -1,0 +1,182 @@
+{
+  "android/app/build.gradle": {
+    "mtime": 1790791422.3971045,
+    "seen": 1790791672.656885,
+    "ast_hash": "f291272c0b0c05f5a5dec0271aafe561",
+    "semantic_hash": "f291272c0b0c05f5a5dec0271aafe561"
+  },
+  "android/app/capacitor.build.gradle": {
+    "mtime": 1790791422.397116,
+    "seen": 1790791672.6568918,
+    "ast_hash": "b3e0e568d17b46ebad0ca999885ed0f0",
+    "semantic_hash": "b3e0e568d17b46ebad0ca999885ed0f0"
+  },
+  "android/app/src/androidTest/java/com/getcapacitor/myapp/ExampleInstrumentedTest.java": {
+    "mtime": 1790791422.397753,
+    "seen": 1790791672.656895,
+    "ast_hash": "fbaf7cc870c663eb52dcf218531c439d",
+    "semantic_hash": "fbaf7cc870c663eb52dcf218531c439d"
+  },
+  "android/app/src/main/java/com/navinvenkatesan/exitkit/MainActivity.java": {
+    "mtime": 1790791422.3984737,
+    "seen": 1790791672.6568966,
+    "ast_hash": "f8f4d24f6a860d31e4198b05c781915c",
+    "semantic_hash": "f8f4d24f6a860d31e4198b05c781915c"
+  },
+  "android/app/src/test/java/com/getcapacitor/myapp/ExampleUnitTest.java": {
+    "mtime": 1790791422.4038267,
+    "seen": 1790791672.6568978,
+    "ast_hash": "e91b4501c14da821682fa5c26a16d616",
+    "semantic_hash": "e91b4501c14da821682fa5c26a16d616"
+  },
+  "android/build.gradle": {
+    "mtime": 1790791422.4038267,
+    "seen": 1790791672.656899,
+    "ast_hash": "edcd663b51acb2986e22ef151e00036f",
+    "semantic_hash": "edcd663b51acb2986e22ef151e00036f"
+  },
+  "android/capacitor.settings.gradle": {
+    "mtime": 1790791422.4038267,
+    "seen": 1790791672.656901,
+    "ast_hash": "34d3ad9e42588fb12734f3852e6d6e26",
+    "semantic_hash": "34d3ad9e42588fb12734f3852e6d6e26"
+  },
+  "android/gradlew": {
+    "mtime": 1790791422.4048374,
+    "seen": 1790791672.6569018,
+    "ast_hash": "f092910dfa8e47c5a37a452c3f6baf8a",
+    "semantic_hash": "f092910dfa8e47c5a37a452c3f6baf8a"
+  },
+  "android/settings.gradle": {
+    "mtime": 1790791422.4051158,
+    "seen": 1790791672.656903,
+    "ast_hash": "f6cd925b3f859e23c3d819fe2459e0e4",
+    "semantic_hash": "f6cd925b3f859e23c3d819fe2459e0e4"
+  },
+  "android/variables.gradle": {
+    "mtime": 1790791422.4051158,
+    "seen": 1790791672.6569045,
+    "ast_hash": "7f844007d51d16140dbd0903de821b18",
+    "semantic_hash": "7f844007d51d16140dbd0903de821b18"
+  },
+  "capacitor.config.ts": {
+    "mtime": 1790790706.8340547,
+    "seen": 1790791672.6569054,
+    "ast_hash": "157a58c6f887018c4c65f019ae773ea9",
+    "semantic_hash": "157a58c6f887018c4c65f019ae773ea9"
+  },
+  "package.json": {
+    "mtime": 1790791422.406215,
+    "seen": 1790791672.656907,
+    "ast_hash": "36ff27c9488ec3e0a100e8f771aa9ded",
+    "semantic_hash": "36ff27c9488ec3e0a100e8f771aa9ded"
+  },
+  "src/App.tsx": {
+    "mtime": 1790790706.8370547,
+    "seen": 1790791672.6569083,
+    "ast_hash": "bb954386fe4c6eed8a36d2a17338eabb",
+    "semantic_hash": "bb954386fe4c6eed8a36d2a17338eabb"
+  },
+  "src/lib/money.ts": {
+    "mtime": 1790790706.8380096,
+    "seen": 1790791672.6569095,
+    "ast_hash": "2798311d25459aece7f1f545e41c203a",
+    "semantic_hash": "2798311d25459aece7f1f545e41c203a"
+  },
+  "src/lib/pack.ts": {
+    "mtime": 1790790706.838091,
+    "seen": 1790791672.656911,
+    "ast_hash": "f6c47842f1d7e0c3484f957716e9862f",
+    "semantic_hash": "f6c47842f1d7e0c3484f957716e9862f"
+  },
+  "src/lib/pdf.ts": {
+    "mtime": 1790790706.838091,
+    "seen": 1790791672.6569118,
+    "ast_hash": "04c96b15a8460065b2c8db8405ac2457",
+    "semantic_hash": "04c96b15a8460065b2c8db8405ac2457"
+  },
+  "src/lib/purchases.ts": {
+    "mtime": 1790790706.838091,
+    "seen": 1790791672.656913,
+    "ast_hash": "ed80af7e9d2f1c1d7327376c986c9894",
+    "semantic_hash": "ed80af7e9d2f1c1d7327376c986c9894"
+  },
+  "src/lib/settlement.ts": {
+    "mtime": 1790790706.838091,
+    "seen": 1790791672.6569145,
+    "ast_hash": "687727a5f299aae7faaf20fc07c4a0ad",
+    "semantic_hash": "687727a5f299aae7faaf20fc07c4a0ad"
+  },
+  "src/lib/store.ts": {
+    "mtime": 1790790706.838091,
+    "seen": 1790791672.6569157,
+    "ast_hash": "601be1d588ef13885d6e3004a3f17bc7",
+    "semantic_hash": "601be1d588ef13885d6e3004a3f17bc7"
+  },
+  "src/lib/templates.ts": {
+    "mtime": 1790790706.838091,
+    "seen": 1790791672.656917,
+    "ast_hash": "91c2a8e33768626b1291922f373a2c85",
+    "semantic_hash": "91c2a8e33768626b1291922f373a2c85"
+  },
+  "src/lib/types.ts": {
+    "mtime": 1790790706.838091,
+    "seen": 1790791672.6569183,
+    "ast_hash": "36998668bc24ca99e4c49aec78e8b56a",
+    "semantic_hash": "36998668bc24ca99e4c49aec78e8b56a"
+  },
+  "src/main.tsx": {
+    "mtime": 1790790706.838091,
+    "seen": 1790791672.6569195,
+    "ast_hash": "69542cb20de5e39262aacdaea4417043",
+    "semantic_hash": "69542cb20de5e39262aacdaea4417043"
+  },
+  "src/test/pack.test.ts": {
+    "mtime": 1790790706.838091,
+    "seen": 1790791672.6569247,
+    "ast_hash": "8910a33f7bfddeea748cc328de405a04",
+    "semantic_hash": "8910a33f7bfddeea748cc328de405a04"
+  },
+  "src/test/settlement.test.ts": {
+    "mtime": 1790790706.8389542,
+    "seen": 1790791672.656926,
+    "ast_hash": "c2b875030025c0fa133da994e28de29a",
+    "semantic_hash": "c2b875030025c0fa133da994e28de29a"
+  },
+  "tsconfig.json": {
+    "mtime": 1790790706.8389542,
+    "seen": 1790791672.6569276,
+    "ast_hash": "dddf4d9ce66f9cb65741abf5b96d73a1",
+    "semantic_hash": "dddf4d9ce66f9cb65741abf5b96d73a1"
+  },
+  "vite.config.ts": {
+    "mtime": 1790790706.8389542,
+    "seen": 1790791672.6569288,
+    "ast_hash": "fe9720f5159641e02aecb5e3620771d9",
+    "semantic_hash": "fe9720f5159641e02aecb5e3620771d9"
+  },
+  "README.md": {
+    "mtime": 1790791422.396116,
+    "seen": 1790791672.6569297,
+    "ast_hash": "286f7c591f3ae0240d38ac486d57d7a0",
+    "semantic_hash": "286f7c591f3ae0240d38ac486d57d7a0"
+  },
+  "index.html": {
+    "mtime": 1790790706.8350549,
+    "seen": 1790791672.6569312,
+    "ast_hash": "1629273fb831210afc27c3d66d71bffb",
+    "semantic_hash": "1629273fb831210afc27c3d66d71bffb"
+  },
+  "assets/icon.png": {
+    "mtime": 1790790706.8340547,
+    "seen": 1790791672.6569324,
+    "ast_hash": "0903feb869cb8bc3c5269a2a6fcbe113",
+    "semantic_hash": "0903feb869cb8bc3c5269a2a6fcbe113"
+  },
+  "screenshots/setup-screen-1179x2556.png": {
+    "mtime": 1790790706.8370547,
+    "seen": 1790791672.6569335,
+    "ast_hash": "d3e5a6d4da184efb930847ada22a87de",
+    "semantic_hash": "d3e5a6d4da184efb930847ada22a87de"
+  }
+}
